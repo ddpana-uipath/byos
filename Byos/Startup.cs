@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Byos
 {
@@ -24,8 +25,11 @@ namespace Byos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ITenantsRepository, MockTenantsRepository>();
-            services.AddRazorPages();
+            services.AddDbContextPool<AppPostgresContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PostgresConnection")));
+            services.AddRazorPages().AddXmlSerializerFormatters();
+            services.AddTransient<IUserRepository, MockUserRepository>();
+            services.AddTransient<ITenantsRepository, MockTenantsRepository>();
+            
             
         }
 
@@ -53,6 +57,7 @@ namespace Byos
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                // endpoints.MapControllerRoute("login", "login/{controller=Home}/{action=Login}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("admin", "admin/{controller=Admin}/{action=Index}/{id?}");
             });

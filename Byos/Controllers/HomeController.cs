@@ -11,16 +11,46 @@ namespace Byos.Controllers
     {
         public HomeController()
         {
-            
         }
+
+        [Route("~/")]
+        [Route("~/index")]
+        [Route("~/home")]
         public ActionResult Index()
         {
-            ViewBag.Title = "Homepage";
+            ViewBag.Title = "BYOS";
+            ViewBag.AppTitle = "BYOS";
             return View();
         }
-        public string Details(int id)
+
+        [Route("~/login")]
+        [HttpGet]
+        public ActionResult Login()
         {
+            ViewBag.AppTitle = "BYOS";
+            return View();
+        }
+
+        [Route("~/login")]
+        [HttpPost]
+        public string PostLogin()
+        {
+            ViewBag.AppTitle = "BYOS";
             return "Test";
+        }
+
+        [Route("~/register")]
+        public ActionResult Register()
+        {
+            ViewBag.AppTitle = "BYOS";
+            return View();
+        }
+
+        [Route("~/forgot-password")]
+        public ActionResult ForgotPassword()
+        {
+            ViewBag.AppTitle = "BYOS";
+            return View();
         }
 
     }
