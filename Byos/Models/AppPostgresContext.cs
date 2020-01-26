@@ -14,5 +14,20 @@ namespace Byos.Models
         }
 
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Name = "Daniel Pana",
+                    Department = Dept.IT,
+                    Email = "karo@webi.ro",
+                    Password = "efhnopee"
+                }
+            );
+
+        }
     }
 }
