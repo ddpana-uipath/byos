@@ -1,5 +1,11 @@
 ﻿using Byos.Models;
+using Byos.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,42 +22,12 @@ namespace Byos.Controllers
         [Route("~/")]
         [Route("~/index")]
         [Route("~/home")]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             ViewBag.Title = "BYOS";
             ViewBag.AppTitle = "BYOS";
             return View();
         }
-
-        [Route("~/login")]
-        [HttpGet]
-        public ActionResult Login()
-        {
-            ViewBag.AppTitle = "BYOS";
-            return View();
-        }
-
-        [Route("~/login")]
-        [HttpPost]
-        public string PostLogin()
-        {
-            ViewBag.AppTitle = "BYOS";
-            return "Test";
-        }
-
-        [Route("~/register")]
-        public ActionResult Register()
-        {
-            ViewBag.AppTitle = "BYOS";
-            return View();
-        }
-
-        [Route("~/forgot-password")]
-        public ActionResult ForgotPassword()
-        {
-            ViewBag.AppTitle = "BYOS";
-            return View();
-        }
-
     }
 }
